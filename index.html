@@ -62,7 +62,7 @@
                 </a>
                 <img src="./asset/image/6.png" alt="">
             </div>
-        </div>
+            
     </div>
     <!-- <div class="btn-group">
         <button class="last btn">
@@ -107,6 +107,43 @@
         let indexOne = 10
         let timer = null
         let animationTime = 0.5
+
+        let isMouseDown = false;
+    let startX = 0;
+    let scrollLeft = 0;
+    const swipeThreshold = 50; // 滑动阈值（像素）
+
+     // 鼠标事件处理
+     imgListOne.addEventListener('mousedown', (e) => {
+        isMouseDown = true;
+        startX = e.pageX - imgListOne.offsetLeft;
+        scrollLeft = imgListOne.scrollLeft;
+        stopAutoPlay(); // 滑动时暂停自动播放
+    });
+
+    imgListOne.addEventListener('mouseleave', () => {
+        isMouseDown = false;
+    });
+    imgListOne.addEventListener('mouseup', (e) => {
+        isMouseDown = false;
+        startAutoPlay(); // 滑动结束恢复自动播放
+        
+        // 计算滑动距离和方向
+        const x = e.pageX - imgListOne.offsetLeft;
+        const walk = x - startX;
+        
+        if (Math.abs(walk) > swipeThreshold) {
+            if (walk > 0) {
+                cilckFun('last'); // 向右滑动切上一张
+            } else {
+                cilckFun('next'); // 向左滑动切下一张
+            }
+        }
+    });
+    // 禁用默认拖拽行为
+    imgListOne.addEventListener('dragstart', (e) => {
+        e.preventDefault();
+    });
        
 
         // 初始化数组中元素的的顺序，将最后一张图片放在第一位与html部分图片展示位置一致

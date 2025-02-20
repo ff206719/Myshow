@@ -11,79 +11,86 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: Arial, sans-serif;
         }
 
         body {
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: beige;
-            /* height: 100vh; */
-
-        }
-
-        img {
-            width: 262px;
-            height: 400px;
+            background-color: #f5f5dc;
+            height: 100vh;
         }
 
         .war {
             display: flex;
-            width: 98%;
+            width: 100%;
             height: 400px;
+            padding: 20px;
         }
 
         .war .imgas {
             flex: 1;
             overflow: hidden;
-            transition: .5s;
+            transition: flex-basis 0.5s ease;
             margin: 0 5px;
-            box-shadow: 10px 10px 20px rgba(0, 0, 0, .5);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             border-radius: 20px;
+            position: relative;
         }
-        .imgas>img {
+
+        .imgas img {
             width: 100%;
             height: 100%;
-            transition:.5s;
-            /*  防止图片过大导致卡顿 */
+            border-radius: 20px;
+            transition: transform 0.5s;
             object-fit: cover;
+            pointer-events: none;
         }
+
         .imgas:hover {
-            /*  弹性为40%*/
-            flex-basis: 40%;
+            flex-basis: 45%;
             cursor: pointer;
+        }
+
+        .imgas:hover img {
+            transform: scale(1.05);
+        }
+
+        .imgas:hover::after {
+            content: attr(data-title);
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 16px;
+            opacity: 1;
+            transition: opacity 0.5s;
         }
     </style>
 </head>
 
 <body>
     <div class="war">
-        <div class="imgas">
+        <div class="imgas" data-title="英雄一">
             <img src="./imag/en1.jpg" alt="">
         </div>
-        <div class="imgas">
+        <div class="imgas" data-title="英雄二">
             <img src="./imag/ds.jpeg" alt="">
         </div>
-        <div class="imgas">
+        <div class="imgas" data-title="英雄三">
             <img src="./imag/kas.jpg" alt="">
         </div>
-        <div class="imgas">
+        <div class="imgas" data-title="英雄四">
             <img src="./imag/sa.jpg" alt="">
         </div>
-        <div class="imgas">
+        <div class="imgas" data-title="英雄五">
             <img src="./imag/yas.jpg" alt="">
         </div>
     </div>
-
-
-
-
-
-
-    <script>
-
-
-    </script>
 </body>
 
 </html>
